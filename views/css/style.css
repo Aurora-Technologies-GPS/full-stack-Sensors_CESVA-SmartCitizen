@@ -1,0 +1,13 @@
+  <style>
+
+  body {
+      background-color: #D8D8D8;
+      color: #444;
+  }
+
+  .hovertabla:hover td {
+      background-color: #f7f7f7;
+       cursor: pointer;
+  }
+
+  </style>
