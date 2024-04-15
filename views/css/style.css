@@ -1,13 +1,27 @@
-  <style>
-
-  body {
+  <style>body {
       background-color: #D8D8D8;
       color: #444;
   }
-
   .hovertabla:hover td {
       background-color: #f7f7f7;
-       cursor: pointer;
+      cursor: pointer;
   }
+  .btn_flotante {
+      position: absolute;
+      background: transparent;
+      top: 0px;
+      left: 0px;
+      , right: 0px;
+      z-index: 1;
+      bottom: 0px;
+      width: 100%;
+      border: none;
+      cursor: pointer;
+  }
+
+  .hovertabla:hover td form bottom{
+      cursor: pointer;
+  }
+
 
   </style>

@@ -13,16 +13,13 @@ mongoose.connect(uri).then(() => {
 }).catch(e => console.log(e))
 
 
-async function consult() {
+
+
+async function count() {
     try {
 
-        //const salidaDB = await collectionName.find() //.sort({timestamp:-1}).limit(1)
-        const salidaDB = await collectionName.find().sort({timestamp:-1}) //.sort({timestamp:-1}).limit(1)
+        const salidaDB = await collectionName.distinct("sensor_name")
 
-
-        //const salidaDB = await collectionName.find({sensor_type:"CESVA"}) //.sort({timestamp:-1}).limit(1)
-        //const salidaDB = await collectionName.find({sensor_type:"CESVA"}).sort({timestamp:-1}).limit(1)
-        //const salidaDB = await collectionName.find({sensor_type:"CESVA"}).sort({timestamp:-1}) //.limit(1)
         return salidaDB
     } catch (err) {
         return err
@@ -30,4 +27,37 @@ async function consult() {
 }
 
 
-module.exports = { consult }
+
+async function consult(sensor_type) {
+    try {
+
+        const salidaDB = await collectionName.find({sensor_name:sensor_type}).sort({timestamp:-1}).limit(1)
+
+        return salidaDB
+    } catch (err) {
+        return err
+    }
+}
+
+
+async function consult_history(name, from ,to) {
+
+    try {
+
+    console.log({
+            name:name,
+            desde:from, 
+            hasta:to
+        })
+
+        const salidaDB = await collectionName.find({sensor_name:name, timestamp: { $gt: from, $lt: to}})
+
+        return salidaDB
+    } catch (err) {
+        return err
+    }
+}
+
+
+
+module.exports = { consult, consult_history, count }
