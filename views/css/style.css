@@ -23,5 +23,11 @@
       cursor: pointer;
   }
 
+  .columnaName  {
+  position: sticky; 
+  top: 0px;
+}
+
+
 
   </style>

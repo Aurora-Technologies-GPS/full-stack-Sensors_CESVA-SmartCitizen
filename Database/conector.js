@@ -39,11 +39,21 @@ async function consult(sensor_type) {
     }
 }
 
+const buscarIndex = (statement, caracter) => {
+    for (let i = 0; i < statement.length; i++) {
+        if (statement[i] == caracter) {
+            return i;
+        }
+    }
+}
+
+
 
 async function consult_history(name, from ,to) {
 
     try {
 
+    console.clear()
     console.log({
             name:name,
             desde:from, 
