@@ -165,7 +165,7 @@
         </td>
 
         <td class="hovertabla">
-          <div href="#" class="text-body"> <%- (data.historyData[i].timestamp).toISOString() %> </div>
+          <div href="#" class="text-body"> <%- new Date((data.historyData[i].timestamp).toISOString()).toLocaleString("en-US",{timeZone: 'America/Toronto'})  %> </div>
         </td>
 
 
