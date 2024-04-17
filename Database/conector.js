@@ -53,13 +53,7 @@ async function consult_history(name, from ,to) {
 
     try {
 
-    console.clear()
-    console.log({
-            name:name,
-            desde:from, 
-            hasta:to
-        })
-
+    // console.clear()
         const salidaDB = await collectionName.find({sensor_name:name, timestamp: { $gt: from, $lt: to}})
 
         return salidaDB
