@@ -2,8 +2,7 @@ const express = require('express');
 const app = express();
 const fs = require('fs');
 const { consult, consult_history, count } = require('./Database/conector.js');
-const { buscarIndex } = require('./views/tools.js')
-
+const { buscarIndex, from_converter, to_converter } = require('./views/tools.js')
 
 app.set('view engine', 'ejs')
 app.use(express.urlencoded({ extended: true }))
@@ -14,13 +13,12 @@ const myCss = {
 
 
 app.get('/', (req, res) => {
+
     let dataOUt = []
 
-let d_From= new Date(new Date().getTime() - 24 * 60 * 60 * 179).toISOString()
-d_From=d_From.substring(0,buscarIndex(d_From,".")-3)
-
-let d_to= new Date().toISOString()
-d_to=d_to.substring(0,buscarIndex(d_to,".")-3)
+    let hoy=new Date;
+    let d_From= from_converter(hoy);
+    let d_to= to_converter(hoy);
 
     count().then(result_count => {
         if (result_count) {
@@ -55,13 +53,12 @@ d_to=d_to.substring(0,buscarIndex(d_to,".")-3)
 app.post('/search_Panel/:sensorName', (req, res) => {
     let {   from, to } = req.body
 
-let d_From= new Date(new Date().getTime() - 24 * 60 * 60 * 179).toISOString()
-d_From=d_From.substring(0,buscarIndex(d_From,".")-3)
-
-let d_to= new Date().toISOString()
-d_to=d_to.substring(0,buscarIndex(d_to,".")-3)
+    let hoy=new Date;
+    let d_From= from_converter(hoy);
+    let d_to= to_converter(hoy);
 
     consult_history(req.params.sensorName, from, to).then(historyData => { 
+
         res.render("search_Panel", {
             title: 'Searcher',
             myCss: myCss,
@@ -73,8 +70,8 @@ d_to=d_to.substring(0,buscarIndex(d_to,".")-3)
             	from: d_From,
             	to: d_to
             }
-
         })
+
     })
 });
 
