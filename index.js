@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const fs = require('fs');
 const { consult, consult_history, count } = require('./Database/conector.js');
-const { buscarIndex, from_converter, to_converter } = require('./views/tools.js')
+const { from_converter, to_converter } = require('./views/tools.js')
 
 app.set('view engine', 'ejs')
 app.use(express.urlencoded({ extended: true }))
