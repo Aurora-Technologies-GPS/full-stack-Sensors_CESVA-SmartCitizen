@@ -1,6 +1,4 @@
 const express = require('express');
-
-const fs = require('fs');
 const { consult, consult_history, count } = require('../Database/conector.js');
 const { from_converter, to_converter } = require('../src/tools.js')
 
@@ -11,9 +9,7 @@ const credentials={
     pass:1234567
 }
 
-const myCss = {
-    style: fs.readFileSync('./views/css/style.css', 'utf8')
-};
+
 
 index.get('/',(req, res)=>{
 
@@ -79,7 +75,6 @@ index.get('/data',preFetch, (req, res) => {
                         setTimeout(() => {
                             res.render("tables", {
                                 title: 'My Site',
-                                myCss: myCss,
                                 data: dataOUt,
                                 date: {
                                     from: d_From,
@@ -107,7 +102,6 @@ index.post('/search_Panel/:sensorName', (req, res) => {
 
         res.render("search_Panel", {
             title: 'Searcher',
-            myCss: myCss,
             data: {
                 sensorName: req.params.sensorName,
                 historyData: historyData
