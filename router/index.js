@@ -6,6 +6,11 @@ const { from_converter, to_converter } = require('../src/tools.js')
 
 const index = express.Router();
 
+const credentials={
+    user:'admin@edelivery.com', 
+    pass:1234567
+}
+
 const myCss = {
     style: fs.readFileSync('./views/css/style.css', 'utf8')
 };
@@ -26,10 +31,27 @@ index.post('/register',(req, res)=>{
 
 })
 
+index.post('/logout',(req, res)=>{
+    
+    delete req.session.authorization;
+    res.redirect("./")
+
+})
+
 const preFetch=(req, res, next)=>{
     if(req.session.authorization){
-        console.log('authorization PASS')
-        next()
+
+         if ((req.session.authorization.email==credentials.user) && (req.session.authorization.password)==credentials.pass) {
+
+             next();
+             console.log({result:'authorization PASS'})
+
+        } else {
+            console.log({result:'Contrasena Incorrecta'})
+            res.redirect("./")
+        }
+
+
     }else{
         console.log('authorization DENIED')
         res.redirect("./")
